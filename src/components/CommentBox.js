@@ -46,4 +46,5 @@ class CommentBox extends Component {
    The second argument wires up all the action creators. 
    In this case, passing in all the actions from src/actions/index.js is a shortcut for easily wiring them up.
 */
+
 export default connect(null, actions)(CommentBox);
