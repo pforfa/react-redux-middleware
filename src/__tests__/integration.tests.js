@@ -11,4 +11,9 @@ it('can fetch a list of comments and display them', () => {
         </Root>
     );
 
+    // Find the button for fetching comments from the place holder API
+    wrappedComponent.find('.fetch-comments').simulate('click');
+
+    expect(wrappedComponent.find('li').length).toEqual(500);
+
 });
