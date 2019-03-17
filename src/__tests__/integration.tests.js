@@ -35,9 +35,11 @@ it('can fetch a list of comments and display them', (done) => {
     // Find the button for fetching comments from the place holder API
     wrappedComponent.find('.fetch-comments').simulate('click');
 
-    // Introducer a small delay to allow moxios (axios request mocking library) to intercept the
-    // request fired from the fetchComments action creator
-    setTimeout(() => {
+    // Introducer a delay for moxios to fetch all of  it's fake data for the test purposes.
+    // No need to use a setTimeout function since the moxios library provides an internal implementation of the timeout functionality.
+    // The way this works is, moxios waits for an incoming request to be processed. Once that request is processed, then the callback function
+    // (the arrow function () => { ... } gets executed, since the request was processed and the data is readily available for consumption by the test.
+    moxios.wait(() => {
         wrappedComponent.update();
 
         expect(wrappedComponent.find('li').length).toEqual(2);
@@ -49,6 +51,6 @@ it('can fetch a list of comments and display them', (done) => {
         // setTimeout may produce.
         done();
         wrappedComponent.unmount();
-    }, 500);
+    });
 
 });
