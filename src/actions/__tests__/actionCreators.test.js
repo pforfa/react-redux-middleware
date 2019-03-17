@@ -14,4 +14,4 @@ describe('saveComment', () => {
 
         expect(action.payload).toEqual(someComment);
     });
-})
+});

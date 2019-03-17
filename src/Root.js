@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxPromise from 'redux-promise';
 /*This statement imports the reducers directory under src/reducers 
   By default when importing a whole directory, the importer will try to import the index.js file located
   within that directory. In this case, an index.js file is present, and it imports the default exported function
@@ -29,8 +30,12 @@ import reducers from 'reducers';
   This ensures that an undefined reference isn't passed in, which can cause some issues within redux.
 */
 export default ({children, initialState = {} }) => {
+    const store = createStore(
+        reducers,
+        initialState,
+        applyMiddleware(reduxPromise));
     return (
-        <Provider store={createStore(reducers, initialState)} >
+        <Provider store={store} >
             {children}
         </Provider>
     );
