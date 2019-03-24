@@ -1,7 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reduxPromise from 'redux-promise';
+import async from 'middlewares/async';
+
 /*This statement imports the reducers directory under src/reducers 
   By default when importing a whole directory, the importer will try to import the index.js file located
   within that directory. In this case, an index.js file is present, and it imports the default exported function
@@ -33,7 +34,8 @@ export default ({children, initialState = {} }) => {
     const store = createStore(
         reducers,
         initialState,
-        applyMiddleware());
+        applyMiddleware(async));
+
     return (
         <Provider store={store} >
             {children}
