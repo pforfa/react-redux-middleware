@@ -1,7 +1,12 @@
-export default ({ dispatch }) => {
-    return function(next) { // next is a reference to the next middleware
-        return function(action) { // is a reference to the actual action from the action creator
+export default ({ dispatch }) =>  next => action => {
+    // Check to see if the action has a promise on its 'payload' property
+    // IF YES
+    //      Then wait for it to resolve
+    // IF NO
+    //      Then send it down to the next middleware
 
-        }
+    if (!action.payload || !action.payload.then) {
+        return next(action);
     }
-}
+};
+
